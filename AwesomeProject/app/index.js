@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
 import { RegistrationScreen } from "../Screens/RegistrationScreen";
+import { LoginScreen } from "../Screens/LoginScreen";
 export default function Page() {
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        <RegistrationScreen />
+        <LoginScreen />
       </View>
     </View>
   );

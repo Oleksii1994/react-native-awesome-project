@@ -1,11 +1,9 @@
 import {
-  StyleSheet,
   View,
   Image,
   ImageBackground,
   Text,
   TextInput,
-  Button,
   TouchableOpacity,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
@@ -15,10 +13,8 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { useFonts } from "expo-font";
-import { styles } from "../styles/registration.styles";
-
-export const RegistrationScreen = () => {
-  const [name, setName] = useState("");
+import { styles } from "../styles/login.styles";
+export const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fontsLoaded] = useFonts({
@@ -26,10 +22,9 @@ export const RegistrationScreen = () => {
     RobotoRegular: require("../assets/fonts/robotoregular.ttf"),
   });
 
-  const onRegister = () => {
-    Alert.alert("Credentials", `${name} + ${email} + ${password}`);
-    console.log("Credentials", `${name} + ${email} + ${password}`);
-    setName("");
+  const onLogin = () => {
+    Alert.alert("Credentials", `${email} + ${password}`);
+    console.log("Credentials", `${email} + ${password}`);
     setPassword("");
     setEmail("");
   };
@@ -49,34 +44,23 @@ export const RegistrationScreen = () => {
           style={styles.container}
         >
           <View style={styles.containerForm}>
-            <View style={styles.registrationFormBox}>
-              <View style={styles.photoBox}>
-                <Image
-                  source={require("../assets/images/add.png")}
-                  style={styles.addPhotoImg}
-                ></Image>
-              </View>
-              <Text style={styles.registerTitle}>Registration</Text>
+            <View style={styles.loginFormBox}>
+              <Text style={styles.LoginTitle}>Log In</Text>
               <View style={styles.inputsContainer}>
                 <TextInput
                   style={styles.input}
-                  value={name}
-                  onChangeText={setName}
-                  placeholder="Login"
-                ></TextInput>
-                <TextInput
-                  style={styles.input}
-                  value={email}
                   onChangeText={setEmail}
+                  value={email}
                   placeholder="Email"
                 ></TextInput>
                 <View style={styles.passwordContainer}>
                   <TextInput
-                    style={styles.inputLast}
-                    onChangeText={setPassword}
+                    style={styles.input}
                     value={password}
-                    secureTextEntry={true}
+                    onChangeText={setPassword}
                     placeholder="Password"
+                    textContentType="password"
+                    secureTextEntry={true}
                   ></TextInput>
                   <TouchableOpacity style={styles.showPasswordContainer}>
                     <Text style={styles.showPasswordText}>Show</Text>
@@ -84,16 +68,17 @@ export const RegistrationScreen = () => {
                 </View>
               </View>
               <TouchableOpacity
-                title="Sign up"
-                onPress={onRegister}
-                style={styles.signUpBtn}
+                title="Sign in"
+                onPress={onLogin}
+                style={styles.logInBtn}
               >
-                <Text style={styles.btnLabel}>Sign Up</Text>
+                <Text style={styles.btnLabel}>Log In</Text>
               </TouchableOpacity>
               <View>
                 <TouchableOpacity style={styles.textLogInContainer}>
-                  <Text style={styles.textLogIn}>
-                    Already have account? Log In
+                  <Text style={styles.textQuestionRegister}>
+                    Don't have an account?{" "}
+                    <Text style={styles.textRegister}>Register</Text>
                   </Text>
                 </TouchableOpacity>
               </View>
