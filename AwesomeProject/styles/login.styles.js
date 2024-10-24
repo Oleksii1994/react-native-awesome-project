@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
   loginFormBox: {
     flex: 1,
     position: "absolute",
-    transform: [{ translateX: -216 }, { translateY: -466 }],
+    transform: [{ translateX: -216 }, { translateY: -20 }],
 
     width: 432,
     height: 548,

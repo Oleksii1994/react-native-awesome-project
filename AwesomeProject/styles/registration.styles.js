@@ -10,7 +10,6 @@ export const styles = StyleSheet.create({
   },
   image: {
     position: "absolute",
-
     top: 0,
     left: 0,
     transform: [{ translateX: -216 }, { translateY: -84 }],
@@ -36,7 +35,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     position: "absolute",
     //
-    transform: [{ translateX: -216 }, { translateY: -466 }],
+    transform: [{ translateX: -216 }, { translateY: -120 }],
 
     width: 432,
     height: 548,
