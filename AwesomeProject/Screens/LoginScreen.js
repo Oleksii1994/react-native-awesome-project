@@ -1,25 +1,23 @@
 import { StatusBar } from "expo-status-bar";
+import { SafeAreaView } from "react-native";
 
 import {
-  StyleSheet,
   View,
   Image,
   ImageBackground,
   Text,
   TextInput,
-  Button,
   TouchableOpacity,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
   Platform,
   Alert,
-  SafeAreaView,
 } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import React, { useState } from "react";
 import { useFonts } from "expo-font";
-import { styles } from "../styles/registration.styles";
+import { styles } from "../styles/login.styles";
 
 const initialState = {
   userName: "",
@@ -27,11 +25,10 @@ const initialState = {
   password: "",
 };
 
-export const RegistrationScreen = () => {
+export const LoginScreen = () => {
   const navigation = useNavigation();
   const [state, setState] = useState(initialState);
   const [isShowPassword, setIsShowPassword] = useState(false);
-  // const [name, setName] = useState("");
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
   const [fontsLoaded] = useFonts({
@@ -39,8 +36,8 @@ export const RegistrationScreen = () => {
     RobotoRegular: require("../assets/fonts/robotoregular.ttf"),
   });
 
-  const onRegister = () => {
-    if (!state.email || !state.password || !state.userName) {
+  const onLogin = () => {
+    if (!state.email || !state.password) {
       Alert.alert("All fields must be filled");
       return;
     }
@@ -68,13 +65,8 @@ export const RegistrationScreen = () => {
     return null;
   }
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <StatusBar
-        translucent="true"
-        backgroundColor="rgba(0, 0, 0, 0)"
-        style="dark"
-        hidden="true"
-      />
+    <View style={{ flex: 1 }}>
+      <StatusBar translucent backgroundColor="transparent" style="light" />
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <ImageBackground
@@ -86,43 +78,28 @@ export const RegistrationScreen = () => {
             style={styles.container}
           >
             <View style={styles.containerForm}>
-              <View style={styles.registrationFormBox}>
-                <View style={styles.photoBox}>
-                  <Image
-                    source={require("../assets/images/add.png")}
-                    style={styles.addPhotoImg}
-                  ></Image>
-                </View>
-                <Text style={styles.registerTitle}>Registration</Text>
+              <View style={styles.loginFormBox}>
+                <Text style={styles.LoginTitle}>Log In</Text>
                 <View style={styles.inputsContainer}>
                   <TextInput
                     style={styles.input}
-                    value={state.userName}
-                    onChangeText={(text) =>
-                      setState({ ...state, userName: text.trim() })
-                    }
-                    placeholder="Login"
-                  ></TextInput>
-                  <TextInput
-                    style={styles.input}
-                    value={state.email}
-                    keyboardType="email-address"
                     onChangeText={(text) =>
                       setState({ ...state, email: text.trim() })
                     }
+                    value={state.email}
                     placeholder="Email"
+                    keyboardType="email-address"
                   ></TextInput>
                   <View style={styles.passwordContainer}>
                     <TextInput
-                      style={styles.inputLast}
-                      secureTextEntry={!isShowPassword}
-                      minLength={8}
-                      maxLength={16}
+                      style={styles.input}
+                      value={state.password}
                       onChangeText={(text) =>
                         setState({ ...state, password: text.trim() })
                       }
-                      value={state.password}
                       placeholder="Password (at least 8 characters)"
+                      textContentType="password"
+                      secureTextEntry={!isShowPassword}
                     ></TextInput>
                     <TouchableOpacity
                       style={styles.showPasswordContainer}
@@ -135,24 +112,20 @@ export const RegistrationScreen = () => {
                   </View>
                 </View>
                 <TouchableOpacity
-                  title="Sign up"
-                  onPress={onRegister}
-                  style={styles.signUpBtn}
+                  title="Sign in"
+                  onPress={onLogin}
+                  style={styles.logInBtn}
                 >
-                  <Text style={styles.btnLabel}>Sign Up</Text>
+                  <Text style={styles.btnLabel}>Log In</Text>
                 </TouchableOpacity>
                 <View>
                   <TouchableOpacity
                     style={styles.textLogInContainer}
-                    onPress={() =>
-                      navigation.navigate("Login", {
-                        name: state.userName,
-                        email: state.email,
-                      })
-                    }
+                    onPress={() => navigation.navigate("Registration")}
                   >
-                    <Text style={styles.textLogIn}>
-                      Already have account? Log In
+                    <Text style={styles.textQuestionRegister}>
+                      Don't have an account?{" "}
+                      <Text style={styles.textRegister}>Register</Text>
                     </Text>
                   </TouchableOpacity>
                 </View>
@@ -161,6 +134,6 @@ export const RegistrationScreen = () => {
           </KeyboardAvoidingView>
         </View>
       </TouchableWithoutFeedback>
-    </SafeAreaView>
+    </View>
   );
 };
